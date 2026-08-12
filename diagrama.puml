@@ -1,0 +1,72 @@
+@startuml retiros
+
+class Retiro {
+    -nombre
+    -descripcion
+    -categoria
+    -fecha
+    -vencimientoPago
+    -estadoPago
+    -estado
+    -ubicacion
+    +crear()
+    +mostrar()
+}
+
+class Categoria {
+    -nombre
+    -descripcion
+    +crear()
+    +mostrar()
+}
+
+class Valoracion {
+    -estrellas
+    -observaciones
+    -fecha
+    +crear()
+    +mostrar()
+}
+
+class Usuario {
+    -nombre
+    -email
+    +crear()
+    +mostrar()
+}
+
+class Pago {
+    -monto
+    -fecha
+    -metodoPago
+    +crear()
+    +mostrar()
+}
+
+class Notificacion {
+    -mensaje
+    -fecha
+    -retiro:Retiro
+    +conocerRetiro()
+    +crear()
+    +mostrar()
+}
+
+class Actividad {
+    -nombre
+    -descripcion
+    -horario
+    -retiro:Retiro
+    +conocerRetiro()
+    +crear()
+    +mostrar()
+}
+
+Actividad "1..*" --> "1" Retiro
+Pago "1" <-- "1" Retiro
+Usuario "1" --> "1..*" Retiro
+Notificacion "1..4" --> "1" Retiro
+Valoracion "1" --> "1" Retiro
+Categoria "1" --> "1..*" Retiro
+
+@enduml
