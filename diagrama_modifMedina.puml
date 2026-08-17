@@ -1,0 +1,107 @@
+@startuml retiros
+
+class Retiro #f7b3b3 {
+    -nombre
+    -descripcion
+    -ubicacion
+    -fechaInicio
+    -fechaFinalizacion
+    -horaInicio
+    -costo
+    -categoria: Categoria
+    -contacto
+    -fechaVencimientoPago
+    -pago: Pago
+    -estadoPago
+    --
+    +crear()
+    +mostrar()
+    .. Mtdos. Conocimiento ..
+    +conocerCategoria()
+    +conocerPago()
+    +calcularCostoPendiente()
+}
+
+note right of Retiro::estadoPago
+    "Los diversos estados por los que transitara el retiro
+    acorde a que pagos se realizaron son:
+    Pendiente, senia abonada, pago parcial, pagado totalmente"
+end note
+note right of Retiro::calcularCostoPendiente
+    "Este metodo sirve para calcular el costo pendiente de pago del retiro:
+    costo - sumar(Pagos)"
+end note
+
+class Categoria {
+    -nombre
+    -descripcion
+    +crear()
+    +mostrar()
+    +getNombre()
+    +setNombre()
+}
+
+note bottom of Categoria
+    "Los getters y setters se aplican a todos los demas
+    atributos de todas las clases del modelo"
+end note
+
+class Valoracion #f0f5c1{
+    -retiro: Retiro
+    -estrellas
+    -observaciones
+    -fecha
+    +crear()
+    +mostrar()
+    +conocerRetiro()
+}
+note top of Valoracion
+    "La valoracion es unica por cada retiro, 
+    habilitada al finalizar y opcional"
+end note
+
+class Pago {
+    -monto
+    -fecha
+    -metodoPago
+    +crear()
+    +mostrar()
+}
+note top of Pago
+    "El retiro puede no tener ningun pago
+    asociado, tener 1 solo, o tener varios a lo largo de
+    su ciclo de vida: para su senia, para una cuota,
+    para el pago en una sola trasnferencia"
+end note
+
+class Notificacion #b6f778{
+    -mensaje
+    -fecha
+    -retiro:Retiro
+    +crear()
+    +mostrar()
+    +conocerRetiro()
+}
+note top of Notificacion
+    "Del retiro a la notificacion le interesa conocer fechas
+    de inicio de retiro, de vencimiento de pago, y el estado, ya que
+    en base a esto razonara si enviar la notificacion o no"
+end note
+
+class Actividad {
+    -nombre
+    -descripcion
+    -horario
+    -retiro:Retiro
+    +crear()
+    +mostrar()
+    +conocerRetiro()
+}
+
+Actividad "1..*" --> "1" Retiro
+Pago "0..*" <-- "1" Retiro
+Notificacion "1..4" --> "1" Retiro
+Valoracion "0..1" --> "1" Retiro
+Retiro "1..*" --> "1" Categoria
+
+@enduml
