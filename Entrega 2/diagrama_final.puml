@@ -53,7 +53,7 @@ end note
 
 class Valoracion #f0f5c1{
     -estrellas
-    -observacion
+    -descripcionValoracion
     -fecha
     +crear()
     +mostrar()
@@ -100,7 +100,7 @@ class Actividad {
 
 Actividad "1..*" <-- "1" Retiro
 Pago "0..*" <-- "1" Retiro
-Notificacion "1..4" <-- "1" Retiro
+Notificacion "0..4" <-- "1" Retiro
 Valoracion "0..1" <-- "1" Retiro
 Retiro "1..*" --> "1" Categoria
 
