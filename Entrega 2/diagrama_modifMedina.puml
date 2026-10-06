@@ -8,17 +8,22 @@ class Retiro #f7b3b3 {
     -fechaFinalizacion
     -horaInicio
     -costo
-    -categoria: Categoria
     -contacto
     -fechaVencimientoPago
+    -categoria: Categoria
     -pago: Pago
-    -estadoPago
+    -actividad:Actividad
+    -valoracion:Valoracion
+    -notificacion:Notificacion
     --
     +crear()
     +mostrar()
     .. Mtdos. Conocimiento ..
     +conocerCategoria()
     +conocerPago()
+    +conocerActividad()
+    +conocerValoracion()
+    +conocerNotificacion()
     +calcularCostoPendiente()
 }
 
@@ -47,13 +52,11 @@ note bottom of Categoria
 end note
 
 class Valoracion #f0f5c1{
-    -retiro: Retiro
     -estrellas
-    -observaciones
+    -observacion
     -fecha
     +crear()
     +mostrar()
-    +conocerRetiro()
 }
 note top of Valoracion
     "La valoracion es unica por cada retiro, 
@@ -64,6 +67,7 @@ class Pago {
     -monto
     -fecha
     -metodoPago
+    -estadoPago
     +crear()
     +mostrar()
 }
@@ -77,10 +81,8 @@ end note
 class Notificacion #b6f778{
     -mensaje
     -fecha
-    -retiro:Retiro
     +crear()
     +mostrar()
-    +conocerRetiro()
 }
 note top of Notificacion
     "Del retiro a la notificacion le interesa conocer fechas
@@ -92,16 +94,14 @@ class Actividad {
     -nombre
     -descripcion
     -horario
-    -retiro:Retiro
     +crear()
     +mostrar()
-    +conocerRetiro()
 }
 
-Actividad "1..*" --> "1" Retiro
+Actividad "1..*" <-- "1" Retiro
 Pago "0..*" <-- "1" Retiro
-Notificacion "1..4" --> "1" Retiro
-Valoracion "0..1" --> "1" Retiro
+Notificacion "1..4" <-- "1" Retiro
+Valoracion "0..1" <-- "1" Retiro
 Retiro "1..*" --> "1" Categoria
 
 @enduml
