@@ -1,0 +1,39 @@
+@startuml diagramaCU
+left to right direction
+
+actor "Usuario" as U
+actor "Tiempo Sistema)" as T
+
+usecase "1. Registrar nuevo retiro" as UC1
+usecase "2. Consultar retiro agendado" as UC2
+usecase "3. Modificar retiro agendado" as UC3
+usecase "4. Dar de baja un retiro" as UC4
+usecase "5. Registrar actividad" as UC5
+usecase "6. Registrar categoría" as UC6
+usecase "7. Registrar pago" as UC7
+usecase "8. Registrar valoración" as UC8
+usecase "9. Registrar notificaciones" as UC9
+usecase "10. Actualizar estado Retiro" as UC10
+
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+U --> UC5
+U --> UC6
+U --> UC7
+U --> UC8
+
+UC5 .> UC1 : <<extend>>
+UC6 .> UC1 : <<extend>>
+UC7 .> UC1 : <<extend>>
+
+T --> UC9
+T --> UC10
+
+note as N1
+**Actores**
+- Usuario.
+- Tiempo (Sistema).
+end note
+@enduml

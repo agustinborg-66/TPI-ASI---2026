@@ -1,21 +1,16 @@
 @startuml Diagrama
 [*] --> Agendado : Registrar retiro
 
-Agendado : Registrar pago / actualizar saldo y estado de pago
-Agendado : Modificar retiro
+
 Agendado : Confirmar asistencia / confirmacionDeAsistencia = CONFIRMADO
-Agendado : 7 días antes del inicio / enviar notificación
-Agendado : 1 día antes del inicio / enviar notificación
 
 state evaluar <<choice>>
-Agendado --> evaluar : Llega la fecha de inicio
-evaluar --> EnCurso : [confirmacionDeAsistencia = CONFIRMADO]
+Agendado --> EnCurso : Llega la fecha de inicio
+evaluar -->  : [confirmacionDeAsistencia = CONFIRMADO]
 evaluar --> Cancelado : [confirmacionDeAsistencia ≠ CONFIRMADO]
 
-Agendado --> Cancelado : Cancelar retiro
+Agendado --> Cancelado : Dar de baja un retiro
 EnCurso --> Finalizado : Llega la fecha de finalización
-
-Finalizado : Registrar valoración [no existe valoración]
 
 Finalizado --> [*]
 Cancelado --> [*]
