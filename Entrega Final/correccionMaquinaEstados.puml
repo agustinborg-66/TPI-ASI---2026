@@ -1,16 +1,11 @@
 @startuml Diagrama
-[*] --> Agendado : Registrar retiro
+[*] --> Agendado : Registrar nuevo retiro
 
-
-Agendado : Confirmar asistencia / confirmacionDeAsistencia = CONFIRMADO
-
-state evaluar <<choice>>
-Agendado --> EnCurso : Llega la fecha de inicio
-evaluar -->  : [confirmacionDeAsistencia = CONFIRMADO]
-evaluar --> Cancelado : [confirmacionDeAsistencia ≠ CONFIRMADO]
-
-Agendado --> Cancelado : Dar de baja un retiro
-EnCurso --> Finalizado : Llega la fecha de finalización
+Agendado --> Confirmado : Modificar retiro agendado
+Agendado --> Cancelado : Dar de baja un retiro (Manual) / Actualizar estado de retiros [fechaIncioRetiro]
+Confirmado --> Cancelado : Dar de baja un retiro
+Confirmado --> EnCurso : Actualizar estado Retiro [fechaIncio]
+EnCurso --> Finalizado : Actualizar estado Retiro [fechaFinalizacion]
 
 Finalizado --> [*]
 Cancelado --> [*]
