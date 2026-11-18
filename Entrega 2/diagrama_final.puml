@@ -10,6 +10,7 @@ class Retiro #f7b3b3 {
     -costo
     -contacto
     -fechaVencimientoPago
+    -estado
     -categoria: Categoria
     -pago: Pago
     -actividad:Actividad
@@ -24,7 +25,9 @@ class Retiro #f7b3b3 {
     +conocerActividad()
     +conocerValoracion()
     +conocerNotificacion()
+    .. Mtdos. Puntuales ..
     +calcularCostoPendiente()
+    +actualizarEstado()
 }
 
 note right of Retiro::estadoPago
@@ -67,7 +70,7 @@ class Pago {
     -monto
     -fecha
     -metodoPago
-    -estadoPago
+    -tipoPago
     +crear()
     +mostrar()
 }
@@ -75,7 +78,8 @@ note top of Pago
     "El retiro puede no tener ningun pago
     asociado, tener 1 solo, o tener varios a lo largo de
     su ciclo de vida: para su senia, para una cuota,
-    para el pago en una sola trasnferencia"
+    para el pago en una sola transferencia
+    Que tipo de pago se registre, se indica en el campo tipoPago"
 end note
 
 class Notificacion #b6f778{
