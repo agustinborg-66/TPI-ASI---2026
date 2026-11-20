@@ -41,6 +41,7 @@ UC5 .down.> UC3 : <<extend>>
 UC6 .down.> UC1 : <<extend>>
 UC6 .down.> UC3 : <<extend>>
 UC7 .down.> UC1 : <<extend>>
+UC7 .down.> UC3 : <<extend>>
 
 T --> UC9
 T --> UC10
